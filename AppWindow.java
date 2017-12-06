@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.event.*;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -11,12 +12,16 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
-public class AppWindow {
+public class AppWindow implements ActionListener {
 	protected Shell shell;
 
 	/**
@@ -58,31 +63,43 @@ public class AppWindow {
 	protected void createContents() throws IOException {
 		shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		shell.setSize(450, 300);
+		shell.setSize(1000, 1000);
 		shell.setText("SWT Application");
 
 		Combo combo = new Combo(shell, SWT.READ_ONLY);
-		combo.setBounds(259, 114, 158, 38);
+		combo.setBounds(841, 77, 170, 38);
 		Comparison.setStats();
 		combo.setItems(Comparison.names);
 
 		Combo combo_1 = new Combo(shell, SWT.READ_ONLY);
-		combo_1.setBounds(10, 122, 158, 22);
+		combo_1.setBounds(43, 85, 170, 22);
 		combo_1.setItems(Comparison.names);
 		// combo_1.setEnabled(false);
 
 		Label lblNbaPlayerComparison = new Label(shell, SWT.NONE);
-		lblNbaPlayerComparison.setFont(SWTResourceManager.getFont(".AppleSystemUIFont", 17, SWT.NORMAL));
-		lblNbaPlayerComparison.setBounds(97, 58, 238, 39);
+		lblNbaPlayerComparison.setFont(SWTResourceManager.getFont(".AppleSystemUIFont", 26, SWT.NORMAL));
+		lblNbaPlayerComparison.setBounds(325, 10, 340, 39);
 		lblNbaPlayerComparison.setText("NBA Player Comparison Tool");
 
 		Button btnCompare = new Button(shell, SWT.NONE);
-		btnCompare.setBounds(170, 201, 94, 28);
+		btnCompare.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
+		btnCompare.setBounds(413, 163, 158, 46);
 		btnCompare.setText("Compare!");
-
+		
 		Label lblVs = new Label(shell, SWT.NONE);
-		lblVs.setBounds(203, 126, 22, 14);
+		lblVs.setFont(SWTResourceManager.getFont(".AppleSystemUIFont", 21, SWT.NORMAL));
+		lblVs.setBounds(474, 78, 40, 27);
 		lblVs.setText("VS.");
+	}
+	// btnCompare.addMouseListener(new MouseListener
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 
 	}
 
