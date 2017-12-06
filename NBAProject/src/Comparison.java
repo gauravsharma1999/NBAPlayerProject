@@ -1,36 +1,42 @@
 import java.io.IOException;
 
 public class Comparison {
-	private String inputFile;
-	public static ExcelReading a = new ExcelReading();
-	public static String[] names;
-	public static String[] teamName;
-	public static double[] points;
-	public static double[] assists;
-	public static double[] rebounds;
-	public static double[] steals;
-	public static double[] blocks;
-	public static double[] turnovers;
-	public static double[] fgPercentage;
-	public static double[] plusMinus;
-	public static double[] efficiency;
+	public final static int SIZE = 151;
+	public String inputFile;
+	public static ExcelReading b = new ExcelReading();
+	public static String[] names = new String[SIZE];
+	public static String[] teamName = new String[SIZE];
+	public static double[] points = new double[SIZE];
+	public static double[] assists = new double[SIZE];
+	public static double[] rebounds = new double[SIZE];
+	public static double[] steals = new double[SIZE];
+	public static double[] blocks = new double[SIZE];
+	public static double[] turnovers = new double[SIZE];
+	public static double[] fgPercentage = new double[SIZE];
+	public static double[] plusMinus = new double[SIZE];
+	public static double[] efficiency = new double[SIZE];
 
-	public void initializeFile() {
-		a.setInputFile("NBAPlayerStats.xls");
-	}
-
+	@SuppressWarnings("static-access")
 	public static void setStats() throws IOException {
-		names = a.readNames(0);
-		teamName = a.readNames(1);
-		points = a.readData(2);
-		assists = a.readData(16);
-		rebounds = a.readData(15);
-		steals = a.readData(18);
-		blocks = a.readData(19);
-		turnovers = a.readData(17);
-		fgPercentage = a.readData(6);
-		plusMinus = a.readData(21);
-		efficiency = a.readData(22);
+		// a.setInputFile();
+		names = b.setStringData(0);
+		teamName = b.setStringData(1);
+		points = b.readData(2);
+		assists = b.readData(16);
+		rebounds = b.readData(15);
+		steals = b.readData(18);
+		blocks = b.readData(19);
+		turnovers = b.readData(17);
+		fgPercentage = b.readData(6);
+		plusMinus = b.readData(21);
+		efficiency = b.readData(22);
 	}
+
+	/**
+	 * public static String[] setStringData(int col) throws IOException { String[]
+	 * output = new String[SIZE]; a.setInputFile(); for (int i = 0; i <
+	 * a.readNames(0).length; i++) { names[i] = a.readNames(col)[i]; } return
+	 * output; }
+	 */
 
 }
