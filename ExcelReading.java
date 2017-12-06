@@ -1,5 +1,9 @@
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -7,23 +11,23 @@ import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
 public class ExcelReading {
-
-	private String inputFile;
+	public final static int SIZE = 151;
+	public static String inputFile;
 	String[] nameData = null;
 	double[] stats = null;
 
+	public static ExcelReading a = new ExcelReading();
+
 	public static void main(String[] args) throws IOException {
-		ExcelReading test = new ExcelReading();
-		test.setInputFile("NBAPlayerStats.xls");
-		test.readNames(0);
+		setStringData(0);
 	}
 
-	public void setInputFile(String inputFile) {
-		this.inputFile = inputFile;
+	public static void setInputFile() {
+		inputFile = "NBAPlayerStats.xls";
 	}
 
 	public String[] readNames(int col) throws IOException {
-		File inputWorkbook = new File(inputFile);
+		File inputWorkbook = new File("NBAPlayerStats.xls");
 		Workbook w;
 
 		try {
@@ -32,20 +36,11 @@ public class ExcelReading {
 
 			Sheet sheet = w.getSheet(0);
 			nameData = new String[sheet.getRows()];
-			// Loop over first 10 column and lines
-			// System.out.println(sheet.getColumns() + " " +sheet.getRows())
 			for (int i = 0; i < sheet.getRows(); i++) {
 				Cell cell = sheet.getCell(col, i);
 				nameData[i] = cell.getContents();
-				System.out.println(cell.getContents());
+				// System.out.println(cell.getContents());
 			}
-
-			/*
-			 * for (int j = 0; j < data.length; j++) { for (int i = 0; i <data[j].length;
-			 * i++) {
-			 * 
-			 * System.out.println(data[j][i]); } }
-			 */
 
 		} catch (BiffException e) {
 			e.printStackTrace();
@@ -63,13 +58,13 @@ public class ExcelReading {
 			// Get the first sheet
 
 			Sheet sheet = w.getSheet(0);
-			nameData = new String[sheet.getRows()];
+			stats = new double[sheet.getRows()];
 			// Loop over first 10 column and lines
 			// System.out.println(sheet.getColumns() + " " +sheet.getRows())
 			for (int i = 0; i < sheet.getRows(); i++) {
 				Cell cell = sheet.getCell(col, i);
-				nameData[i] = cell.getContents();
-				System.out.println(cell.getContents());
+				// stats[i] = (double) cell.getContents();
+				// System.out.println(cell.getContents());
 			}
 
 			/*
@@ -84,6 +79,16 @@ public class ExcelReading {
 		}
 		return stats;
 
+	}
+
+	public static String[] setStringData(int col) throws IOException {
+		String[] output = new String[SIZE];
+		setInputFile();
+		// a.readNames(0);
+		for (int i = 0; i < a.readNames(col).length; i++) {
+			output[i] = a.readNames(col)[i];
+		}
+		return output;
 	}
 
 }
