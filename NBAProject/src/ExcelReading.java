@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.naming.RefAddr;
+
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -19,7 +21,7 @@ public class ExcelReading {
 	public static ExcelReading a = new ExcelReading();
 
 	public static void main(String[] args) throws IOException {
-		setStringData(0);
+		setDoubleData(3);
 	}
 
 	public static void setInputFile() {
@@ -63,7 +65,7 @@ public class ExcelReading {
 			// System.out.println(sheet.getColumns() + " " +sheet.getRows())
 			for (int i = 0; i < sheet.getRows(); i++) {
 				Cell cell = sheet.getCell(col, i);
-				// stats[i] = (double) cell.getContents();
+				stats[i] = Double.parseDouble(cell.getContents());
 				// System.out.println(cell.getContents());
 			}
 
@@ -87,6 +89,16 @@ public class ExcelReading {
 		// a.readNames(0);
 		for (int i = 0; i < a.readNames(col).length; i++) {
 			output[i] = a.readNames(col)[i];
+		}
+		return output;
+	}
+
+	public static double[] setDoubleData(int col) throws IOException {
+		double[] output = new double[SIZE];
+		setInputFile();
+		for (int i = 0; i < a.readData(col).length; i++) {
+			output[i] = a.readData(col)[i];
+			//System.out.println(output[i]+1);
 		}
 		return output;
 	}
