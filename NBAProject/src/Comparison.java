@@ -18,18 +18,18 @@ public class Comparison {
 
 	@SuppressWarnings("static-access")
 	public static void setStats() throws IOException {
-		// a.setInputFile();
+		b.setInputFile();
 		names = b.setStringData(0);
 		teamName = b.setStringData(1);
-		points = b.readData(2);
-		assists = b.readData(16);
-		rebounds = b.readData(15);
-		steals = b.readData(18);
-		blocks = b.readData(19);
-		turnovers = b.readData(17);
-		fgPercentage = b.readData(6);
-		plusMinus = b.readData(21);
-		efficiency = b.readData(22);
+		points = b.setDoubleData(3);
+		assists = b.setDoubleData(16);
+		rebounds = b.setDoubleData(15);
+		steals = b.setDoubleData(18);
+		blocks = b.setDoubleData(19);
+		turnovers = b.setDoubleData(17);
+		fgPercentage = b.setDoubleData(6);
+		plusMinus = b.setDoubleData(21);
+		efficiency = b.setDoubleData(22);
 	}
 
 	/**

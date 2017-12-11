@@ -98,7 +98,7 @@ public class ExcelReading {
 		setInputFile();
 		for (int i = 0; i < a.readData(col).length; i++) {
 			output[i] = a.readData(col)[i];
-			//System.out.println(output[i]+1);
+			//System.out.println(output[i]);
 		}
 		return output;
 	}
